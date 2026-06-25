@@ -1,6 +1,8 @@
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait
 from locators import LoginLocators, SignUpLocators, MainPageLocators, ProfileLocators
+import random
+import string
 
 class HelpFunctions:
 
@@ -27,3 +29,26 @@ class HelpFunctions:
     def exit_flow(driver):
         WebDriverWait(driver, 2).until(ec.element_to_be_clickable(ProfileLocators.EXIT_PROFILE))
         driver.find_element(*ProfileLocators.EXIT_PROFILE).click()
+
+    @staticmethod
+    def get_email():
+        first_part = ''.join(random.choice(string.ascii_lowercase) for i in range(10))
+        email = f'{first_part}+{random.randint(0, 1000)}@gmail.com'
+        return email
+
+    @staticmethod
+    def get_incorrect_email():
+        first_part = ''.join(random.choice(string.ascii_letters) for i in range(10))
+        incorrect_email_mask = random.choice(['@gmailcom', 'gmail.com', 'gmailcom'])
+        incorrect_email = f'{first_part}{incorrect_email_mask}'
+        return incorrect_email
+
+    @staticmethod
+    def get_item_name():
+        item_part = ''.join(random.choice(string.ascii_lowercase) for i in range (5))
+        item = f"Test item: {item_part}{random.randint(0, 1000)}"
+        return item
+
+    @staticmethod
+    def get_item_price():
+        return random.randint(10, 99999)

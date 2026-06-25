@@ -12,7 +12,10 @@ class TestCreateListing:
 
         assert driver.find_element(*LoginLocators.AUTH_TO_ADD_LISTING_POPUP).is_displayed()
 
-    def test_create_listing_success(self, driver, email, item_name, item_price):
+    def test_create_listing_success(self, driver):
+        email = HelpFunctions.get_email()
+        item_name = HelpFunctions.get_item_name()
+        item_price = HelpFunctions.get_item_price()
         HelpFunctions.full_sign_up_flow(driver = driver, email = email, password = TestData.password)
         WebDriverWait(driver, 2).until(ec.visibility_of_element_located(ProfileLocators.PROFILE_PHOTO))
         driver.find_element(*MainPageLocators.CREATE_LISTING).click()
